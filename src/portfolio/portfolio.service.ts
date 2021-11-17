@@ -36,7 +36,7 @@ export class PortfolioService {
         averageBuyPrice = priceWeight / noShares;
       } else {
         if (tradeDto.noOfShares <= noShares) {
-          noShares = noShares + (oldTradeDto ? oldTradeDto.noOfShares : 0) - tradeDto.noOfShares;
+          noShares = noShares - tradeDto.noOfShares;
         } else {
           throw new BadRequestException('Cannot sell more than what is already present');
         }

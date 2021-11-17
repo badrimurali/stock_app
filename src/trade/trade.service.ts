@@ -118,7 +118,6 @@ export class TradeService {
     }
     try {
       const tradeDto = this.createTradeDto(rows)[0];
-      tradeDto.type = tradeDto.type === TradeType.BUY ? TradeType.SELL : TradeType.BUY;
       this.portfolioService.upsert(null, tradeDto);
       const deleteQuery = 'delete from trade where id = $1';
       const res = this.dbService.getClient().query(deleteQuery, [tradeId]);
