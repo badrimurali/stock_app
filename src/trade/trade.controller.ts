@@ -3,7 +3,7 @@ import { TradeDto } from './dto/trade.dto';
 import { TradeUpdateDto } from './dto/trade.update.dto';
 import IResponse from './interface/Response.interface';
 import { TradeService } from './trade.service';
-
+import {ValidatePayloadExistsPipe} from './trade.validationpipe';
 @Controller('trades')
 export class TradeController {
 
@@ -21,7 +21,7 @@ export class TradeController {
 
   @Patch('/:id')
   @UsePipes(ValidationPipe)
-  updateTrade(@Param('id', new ParseIntPipe()) id: number, @Body() tradeDto: TradeUpdateDto): Promise<TradeUpdateDto> {
+  updateTrade(@Param('id', new ParseIntPipe()) id: number, @Body(new ValidatePayloadExistsPipe) tradeDto: TradeUpdateDto): Promise<TradeUpdateDto> {
     return this.tradeService.updateTrade(id, tradeDto);
   }
 
